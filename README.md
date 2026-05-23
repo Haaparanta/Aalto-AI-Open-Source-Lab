@@ -161,7 +161,9 @@ style: |
 
 Menu-aware hybrid forecasting for campus lunch demand and food-waste reduction.
 
-**Aalto AI Open Source Lab** · Hybrid ML + LLM · Open benchmark
+**Aalto AI Open Source Lab** · Hybrid ML + LLM · **MVP live**
+
+**[Run the MVP →](MVP.md)** · **[Download PDF deck →](LunchLens-Elevator-Deck.pdf)**
 
 <div class="speaker-notes">
 
@@ -300,7 +302,7 @@ Land the line: both come from forecasting by guesswork.
 
 <span class="pill">RQ1</span> Does hybrid ML + LLM beat classical forecasting?
 
-<span class="pill">RQ2</span> How much simulated waste disappears with a sharper forecast?
+<span class="pill">RQ2</span> How much waste and cost disappear vs a fixed baseline prep policy?
 
 <span class="pill">RQ3</span> Weather, own menu, or competitors — what matters most?
 
@@ -405,25 +407,25 @@ Structured JSON output — not free-text guessing.
 
 # Step 3 — Look ahead
 
-## Hybrid fusion → two outputs
+## Hybrid fusion → operational outputs
 
 <div class="two-col">
 
 ### Output 1
 **Estimated daily visitors**
-Fused tabular + LLM forecast
+Fused tabular + LLM forecast → recommended prep
 
 ### Output 2
-**Waste saved (%)**
-Simulated savings vs naive baseline prep
+**Baseline vs model cost (€)**
+70% max-capacity baseline · 10 €/kg waste · 5 € shortage penalty
 
 </div>
 
-Better forecast → smarter prep → less in the bin
+Cumulative cost charts show the running difference over time
 
 <div class="speaker-notes">
 
-**Speaker notes:** Fusion combines tabular ML and LLM scores. Output 1 is operational prep; Output 2 is the sustainability metric.
+**Speaker notes:** Fusion combines tabular ML and LLM scores. Compare against a simple baseline: prep for 70% of max capacity. Track waste kg, shortage penalties, and cumulative € saved.
 
 </div>
 
@@ -478,9 +480,9 @@ Emphasize reproducibility — every score is cached and auditable.
 | + Weather | Rain and temperature | Small gain |
 | + LLM menu | Semantic appeal | Does text help? |
 | + Competitors | Local competition | Full context |
-| **LunchLens full** | All fused | Best forecast and waste savings |
+| **LunchLens full** | All fused | Best forecast, waste, and cost savings |
 
-Metrics: MAE, RMSE, MAPE · waste saved % under fixed prep policy
+Metrics: MAE · waste saved % · daily and **cumulative cost difference (€)**
 
 <div class="speaker-notes">
 
@@ -525,20 +527,20 @@ Researchers get an open benchmark; future teams can fork with real data.
 
 <span class="meta">Slide 14 / 15 · Impact · ~15s</span>
 
-# What we ship in 10 weeks
+# What we shipped
 
-| Phase | Weeks | Milestone |
-|-------|-------|-----------|
-| **Ground truth** | 1–3 | Synthetic data + tabular baselines |
-| **Menu brain** | 4–5 | LLM scorer + prompt v1 |
-| **Fusion & fight** | 6–8 | Hybrid model + ablation study |
-| **Ship it open** | 9–10 | Reproducible repo + write-up |
+| Layer | Deliverable |
+|-------|-------------|
+| **Data** | 730-day synthetic campus dataset (menus, weather, competitors) |
+| **Backend** | FastAPI — hybrid forecast, LLM scorer, waste/cost API |
+| **Frontend** | React dashboard — visitor chart, waste kg, cumulative cost (€) |
+| **Baseline** | Fixed prep at **70% of max capacity** vs LunchLens model |
 
-Synthetic data for MVP · architecture ready for a partner restaurant pilot
+Run locally: `backend` + `frontend` · OpenAI key for live LLM scoring · see [MVP.md](MVP.md)
 
 <div class="speaker-notes">
 
-**Speaker notes:** Name the four phases. Be honest: synthetic data now, partner restaurant pilot later. Deliverables: dataset generator, hybrid model, ablation, open repo.
+**Speaker notes:** MVP is runnable today — not a slide-deck prototype. Show the dashboard: pick a date, see baseline vs model prep, waste in kg, and cumulative € difference. Synthetic data now; partner restaurant pilot next.
 
 </div>
 
@@ -558,9 +560,9 @@ Deliverables: dataset generator, hybrid model, ablation, open repo.
 
 Food waste is not abstract. It is trays coming back full while someone else goes hungry.
 
-**Tech for Good** — turn forecast error into a waste metric people can feel.
+**Tech for Good** — turn forecast error into waste kg and € people can feel.
 
-**Open source** — benchmark, eval harness, prompt templates — fork and extend.
+**Open source** — benchmark, eval harness, prompt templates, live MVP — fork and extend.
 
 ## *We go beyond courses. We build, we measure, we share.*
 
